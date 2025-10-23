@@ -1,0 +1,1 @@
+connection_string = "postgresql://admin:admin@db:5432/mydb"

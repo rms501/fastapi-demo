@@ -1,11 +1,18 @@
 FROM python:3.13
-WORKDIR /usr/local/app
 
-COPY ./ ./
-RUN pip3 install --no-cache-dir -r requirements.txt
-EXPOSE 8080
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN useradd app
+RUN useradd -m app
 USER app
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
+WORKDIR /usr/local/app
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen --no-dev --no-install-project
+
+COPY ./ ./
+RUN uv sync --frozen --no-dev
+
+EXPOSE 8080
+
+CMD ["uv", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]

@@ -19,7 +19,7 @@ def health_check(service: HealthService = Depends(get_health_service)):
 
         if service.check_health():
             response =  JSONResponse(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+                status_code=status.HTTP_200_OK,
                 content={ "status": "ok", "database": "ok" }
             )
 

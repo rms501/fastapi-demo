@@ -36,11 +36,6 @@ dist/
 .DS_Store
 Thumbs.db
 
-# Docker
-*.dockerignore
-docker-compose.override.yml
-*.env   # optional: if you store secrets here
-
 # Pytest
 .pytest_cache/
 .coverage
@@ -56,3 +51,6 @@ dmypy.json
 
 # Jupyter notebooks
 .ipynb_checkpoints/
+
+# Ruff
+.ruff_cache/

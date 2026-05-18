@@ -5,7 +5,6 @@ from repositories.student_repository import StudentRepository
 
 
 class StudentService:
-
     def __init__(self, repository: StudentRepository):
         self.repository = repository
 

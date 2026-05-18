@@ -7,20 +7,21 @@ from services.health_service import HealthService
 
 router = APIRouter(prefix="/health")
 
+
 @router.get("/")
 def health_check(service: HealthService = Depends(get_health_service)):
     failure_response = JSONResponse(
         status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-        content={ "status": "degraded", "database": "unhealthy" }
+        content={"status": "degraded", "database": "unhealthy"},
     )
 
     try:
         response = failure_response
 
         if service.check_health():
-            response =  JSONResponse(
+            response = JSONResponse(
                 status_code=status.HTTP_200_OK,
-                content={ "status": "ok", "database": "ok" }
+                content={"status": "ok", "database": "ok"},
             )
 
         return response

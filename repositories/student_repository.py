@@ -8,7 +8,6 @@ from model.dao.student import Student
 
 
 class StudentRepository:
-
     def __init__(self, session: Session):
         self.session = session
 
@@ -16,7 +15,9 @@ class StudentRepository:
         return self.session.exec(select(Student)).all()
 
     def get_student(self, student_id: int) -> Student:
-        student = self.session.exec(select(Student).where(Student.id == student_id)).first()
+        student = self.session.exec(
+            select(Student).where(Student.id == student_id)
+        ).first()
         if not student:
             raise StudentNotFoundError()
         return student
@@ -33,7 +34,9 @@ class StudentRepository:
 
     def delete_student(self, student_id: int) -> None:
         try:
-            student = self.session.exec(select(Student).where(Student.id == student_id)).first()
+            student = self.session.exec(
+                select(Student).where(Student.id == student_id)
+            ).first()
             if not student:
                 raise StudentNotFoundError()
             self.session.delete(student)

@@ -5,9 +5,11 @@ from main import app
 from dependencies.student import get_student_service
 from model.dao.student import Student
 
+
 @pytest.fixture
 def mock_student_service(mocker):
     return mocker.Mock()
+
 
 @pytest.fixture
 def client(mock_student_service):
@@ -17,6 +19,7 @@ def client(mock_student_service):
         yield test_client
 
     app.dependency_overrides.clear()
+
 
 def test_get_students_returns_200(client, mock_student_service):
     mock_student_service.get_students.return_value = [
@@ -33,6 +36,7 @@ def test_get_students_returns_200(client, mock_student_service):
     ]
 
     mock_student_service.get_students.assert_called_once_with()
+
 
 def test_get_student_returns_200(client, mock_student_service):
     mock_student_service.get_student.return_value = Student(
@@ -55,6 +59,7 @@ def test_get_student_returns_200(client, mock_student_service):
     }
 
     mock_student_service.get_student.assert_called_once_with(1)
+
 
 def test_post_student_returns_200(client, mock_student_service):
     mock_student_service.create_student.return_value = Student(
@@ -85,6 +90,7 @@ def test_post_student_returns_200(client, mock_student_service):
     }
 
     mock_student_service.create_student.assert_called_once()
+
 
 def test_delete_student_returns_200(client, mock_student_service):
     response = client.delete("/students/1")

@@ -3,7 +3,6 @@ from sqlalchemy import text
 
 
 class HealthService:
-
     def __init__(self, session: Session):
         self.session = session
 

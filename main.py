@@ -1,6 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import SQLAlchemyError
+import uvicorn
+import os
 
 from api.v1 import student_controller, health_controller
 from core.exceptions import StudentNotFoundError
@@ -27,3 +29,6 @@ async def student_not_found_exception_handler(
             "message": f"Student: {request.path_params.get('student_id')}, not found."
         },
     )
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=int(os.getenv("PORT", 8000)), reload=True)

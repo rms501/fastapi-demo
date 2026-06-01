@@ -3,9 +3,11 @@ name = "fastapi-demo"
 version = "0.1.0"
 requires-python = ">=3.13"
 dependencies = [
+    "alembic>=1.18.4",
     "fastapi==0.119.1",
     "httpx==0.28.1",
     "psycopg2-binary==2.9.11",
+    "psycopg[binary]>=3.3.4",
     "pydantic==2.12.3",
     "sqlalchemy==2.0.44",
     "sqlmodel==0.0.27",

@@ -6,3 +6,9 @@ on:
 jobs:
   validate:
     uses: ./.github/workflows/validate.yml
+
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      push: true
+      tags: ghcr.io/rms501/fastapi-demo:latest

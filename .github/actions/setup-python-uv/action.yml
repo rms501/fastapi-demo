@@ -1,0 +1,18 @@
+name: Setup python and uv
+description: Install python and project dependencies using uv
+
+inputs:
+  version:
+    description: Python version
+    required: false
+    default: "3.13"
+
+runs:
+  using: composite
+
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.version }}
+
+    - uses: ./.github/actions/setup-uv

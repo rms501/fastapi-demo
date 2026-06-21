@@ -9,11 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: ./.github/actions/setup-python-uv
         with:
-          python-version: "3.13"
-
-      - uses: ./.github/actions/setup-uv
+          version: "3.13"
 
       - name: Ruff lint
         run: uv run ruff check --output-format=github .

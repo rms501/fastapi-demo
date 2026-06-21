@@ -25,7 +25,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: uv run alembic upgrade head
+      - uses: ./.github/actions/setup-python-uv
+        with:
+          version: "3.13"
+
+      - name: Migrate SQL
+        run: uv run alembic upgrade head
 
   deploy:
     needs: migrate
@@ -33,4 +38,5 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      - name: Deploy App
+        run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}

@@ -16,3 +16,21 @@ jobs:
     with:
       push: true
       tags: ghcr.io/rms501/fastapi-demo:latest
+
+  migrate:
+    needs:
+      - validate
+      - build
+    name: Migrate SQL schema to Render
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: uv run alembic upgrade head
+
+  deploy:
+    needs: migrate
+    name: Deploy to Render
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL }}

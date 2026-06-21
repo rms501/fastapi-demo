@@ -32,6 +32,8 @@ jobs:
           version: "3.13"
 
       - name: Migrate SQL
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: uv run alembic upgrade head
 
   deploy:
